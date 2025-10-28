@@ -45,8 +45,10 @@
 -   [x] implementar validações requests
 -   [x] padronizar respostas api com resources
 -   [x] implementar paginação listagem usuários
+-   [ ] separar lógica negócio em services
 -   [ ] implementar autenticação api com sanctum (adicionar nível permissão usuários)
 -   [ ] proteger endpoints com middleware autenticação
+-   [ ] implementar testes automatizados (unitários e feature)
 
 ## rodar projeto:
 
