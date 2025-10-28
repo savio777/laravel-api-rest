@@ -27,6 +27,7 @@
 ## comandos úteis:
 
 -   resetar migration: `php artisan migrate:reset`
+-   criar controller crud: `php artisan make:controller --api NomeControllerExample`
 
 ## rodar projeto:
 
