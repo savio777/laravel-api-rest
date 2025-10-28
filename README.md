@@ -29,6 +29,12 @@
 -   resetar migration: `php artisan migrate:reset`
 -   criar controller crud: `php artisan make:controller --api NomeControllerExample`
 -   ver todas as rotas api: `php artisan route:list --path=api`
+-   criar request customizado: `php artisan make:request EntityExampleValidationRequest`
+
+## headers para requisições api:
+
+-   **Content-Type**: application/json
+-   **Accept**: application/json
 
 ## rodar projeto:
 

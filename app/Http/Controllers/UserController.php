@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserEditValidationRequest;
+use App\Http\Requests\UserValidationRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -24,9 +26,29 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserValidationRequest $request)
     {
-        //
+        try {
+            $payload = $request->validated();
+
+            $user = new User;
+            $user->fill($payload);
+            $user->password = Hash::make($payload['password']);
+            $user->save();
+
+            // outra maneira
+            // $user = User::create($payload);
+
+            return response()->json([
+                'data' => $user,
+                'message' => 'Usuário criado com sucesso.',
+            ], 201);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => 'Ocorreu um erro ao criar Usuário',
+
+            ], 400);
+        }
     }
 
     /**
@@ -44,6 +66,7 @@ class UserController extends Controller
         } catch (\Throwable $th) {
             return response()->json([
                 'message' => 'Usuário não encontrado.',
+
             ], 400);
         }
     }
@@ -51,9 +74,39 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UserEditValidationRequest $request, string $id)
     {
-        //
+        try {
+            $user = User::find($id);
+            $payload = $request->validated();
+
+            if (! $user) {
+                return response()->json([
+                    'message' => 'Usuário não encontrado.',
+                ], 400);
+            }
+
+            if (isset($payload['password'])) {
+                $user->password = Hash::make($payload['password']);
+            }
+            if (isset($payload['email']) && $payload['email'] !== $user->email) {
+                $user->email = $payload['email'];
+            }
+            $user->name = $payload['name'];
+            $user->birthdate = $payload['birthdate'];
+
+            $user->save();
+
+            return response()->json([
+                'data' => $user,
+                'message' => 'Usuário atualizado com sucesso.',
+            ], 201);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => 'Ocorreu um erro ao atualizar Usuário',
+                'error' => $th->getMessage(),
+            ], 400);
+        }
     }
 
     /**
@@ -71,6 +124,9 @@ class UserController extends Controller
             }
 
             $user->delete();
+
+            // outra maneira em somente uma linha
+            // User::destroy($id);
 
             return response()->json([
                 'data' => $user,
