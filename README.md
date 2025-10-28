@@ -30,6 +30,8 @@
 -   criar controller crud: `php artisan make:controller --api NomeControllerExample`
 -   ver todas as rotas api: `php artisan route:list --path=api`
 -   criar request customizado: `php artisan make:request EntityExampleValidationRequest`
+-   criar recurso para padronização de respostas: `php artisan make:resource UserResourceExample`
+-   criar coleção de recursos: `php artisan make:resource UserCollection`
 
 ## headers para requisições api:
 
@@ -44,10 +46,8 @@
 -   rodar migrações banco dados: `php artisan migrate`
 -   rodar seeders banco dados: `php artisan db:seed`
 -   comando para inciar servidor: `php artisan serve`
--   acessar no navegador: `http://localhost:8000`
+-   acessar no navegador: `http://localhost:8000` ou `http://localhost:8000/api/test`
 
 [video aula eduteka](https://www.youtube.com/watch?v=jLGKI_zMftU)
 
 <img width="1612" height="551" alt="image" src="https://github.com/user-attachments/assets/d336cb43-7206-4abf-8072-469f9091b849" />
-
-
