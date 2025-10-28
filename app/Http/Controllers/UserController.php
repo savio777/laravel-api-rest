@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserEditValidationRequest;
 use App\Http\Requests\UserValidationRequest;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -12,15 +13,21 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
+        $search = $request->query('search', '');
+        $currentPage = $request->query('current_page', 1);
+        $itemsPerPage = $request->query('items_per_page', 10);
 
-        return response()->json([
-            'data' => $users,
-            'message' => 'Lista de usuários recuperada com sucesso.',
-            'length' => count($users),
-        ]);
+        $skip = ($currentPage - 1) * $itemsPerPage;
+        $users = User::where('name', 'like', "%{$search}%")
+            ->orWhere('email', 'like', "%{$search}%")
+            ->skip($skip)
+            ->take($itemsPerPage)
+            ->orderByDesc('id')
+            ->get();
+
+        return response()->json($users->toResourceCollection());
     }
 
     /**
