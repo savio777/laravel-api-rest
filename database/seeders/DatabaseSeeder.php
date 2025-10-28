@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,11 +16,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        User::factory(10)->create([
+            // campos já existentes na factory
+            // 'name' => 'Test User',
+            // 'email' => 'test@example.com',
+            'birthdate' => Carbon::now()->subYears(25)->format('Y-m-d'),
         ]);
     }
 }
