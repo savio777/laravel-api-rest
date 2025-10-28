@@ -28,6 +28,7 @@
 
 -   resetar migration: `php artisan migrate:reset`
 -   criar controller crud: `php artisan make:controller --api NomeControllerExample`
+-   ver todas as rotas api: `php artisan route:list --path=api`
 
 ## rodar projeto:
 

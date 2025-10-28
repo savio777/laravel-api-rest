@@ -34,7 +34,18 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        try {
+            $user = User::findOrFail($id);
+
+            return response()->json([
+                'data' => $user,
+                'message' => 'Usuário recuperado com sucesso.',
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => 'Usuário não encontrado.',
+            ], 400);
+        }
     }
 
     /**
@@ -50,6 +61,25 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $user = User::find($id);
+
+            if (! $user) {
+                return response()->json([
+                    'message' => 'Usuário não encontrado.',
+                ], 400);
+            }
+
+            $user->delete();
+
+            return response()->json([
+                'data' => $user,
+                'message' => 'Usuário deletado com sucesso.',
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => 'Ocorreu um erro ao deletar Usuário',
+            ], 400);
+        }
     }
 }
