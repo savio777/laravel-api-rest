@@ -38,6 +38,16 @@
 -   **Content-Type**: application/json
 -   **Accept**: application/json
 
+## objetivo projeto:
+
+-   [x] configurar api rest laravel
+-   [x] criar endpoints usuários (CRUD)
+-   [x] implementar validações requests
+-   [x] padronizar respostas api com resources
+-   [x] implementar paginação listagem usuários
+-   [ ] implementar autenticação api com sanctum (adicionar nível permissão usuários)
+-   [ ] proteger endpoints com middleware autenticação
+
 ## rodar projeto:
 
 -   instalar depêndencias: `composer install`
