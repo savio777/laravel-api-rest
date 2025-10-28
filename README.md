@@ -49,3 +49,5 @@
 -   acessar no navegador: `http://localhost:8000` ou `http://localhost:8000/api/test`
 
 [video aula eduteka](https://www.youtube.com/watch?v=jLGKI_zMftU)
+
+<img width="1612" height="551" alt="image" src="https://github.com/user-attachments/assets/d336cb43-7206-4abf-8072-469f9091b849" />
